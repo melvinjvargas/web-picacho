@@ -1,0 +1,515 @@
+ Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/producto/..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head headCacheNode={{rsc:{...}, ...}}>
+                    <__next_viewport_boundary__>
+                    <MetadataWrapper>
+                      <div
++                       hidden={true}
+-                       hidden={null}
+-                       style={{display:"contents"}}
+                      >
+                        <__next_metadata_boundary__>
++                         <Suspense name="Next.Metadata">
+                    ...
+                  ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:3318:56)
+    at updateSuspenseComponent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6299:99)
+    at beginWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6762:24)
+    at runWithFiberInDEV (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:965:74)
+    at performUnitOfWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9555:97)
+    at workLoopConcurrentByScheduler (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:2647:64)
+    at Suspense (<anonymous>)
+[browser] React has detected a change in the order of Hooks called by ProductPage. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://react.dev/link/rules-of-hooks
+
+   Previous render            Next render
+   ------------------------------------------------------
+1. useState                   useState
+2. useState                   useState
+3. useEffect                  useEffect
+4. undefined                  useState
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    at updateHookTypesDev (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4587:25)
+    at Object.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15488:13)
+    at exports.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:1754:36)
+    at useProductSelection (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:452:330)
+    at ProductPage (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:1707:235)
+    at Object.react_stack_bottom_frame (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15037:24)
+    at renderWithHooks (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4620:24)
+    at updateFunctionComponent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6081:21)
+    at beginWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6691:24)
+    at runWithFiberInDEV (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:965:74)
+    at performUnitOfWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9555:97)
+    at workLoopSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9449:40)
+    at renderRootSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9061:186)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:2647:64) (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4587:25)
+[browser] Uncaught Error: Rendered more hooks than during the previous render.
+    at updateWorkInProgressHook (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4734:23)
+    at updateReducer (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4828:20)
+    at Object.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15492:24)
+    at exports.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:1754:36)
+    at useProductSelection (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:452:330)
+    at ProductPage (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:1707:235)
+    at Object.react_stack_bottom_frame (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15037:24)
+    at renderWithHooks (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4620:24)
+    at updateFunctionComponent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6081:21)
+    at beginWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6691:24)
+    at runWithFiberInDEV (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:965:74)
+    at performUnitOfWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9555:97)
+    at workLoopSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9449:40)
+    at renderRootSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:2647:64)
+    at ClientPageRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_0e6hsor._.js:6862:50)
+✓ Compiled in 136ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /producto/cumbre-nublada 200 in 437ms (next.js: 176ms, proxy.ts: 31ms, application-code: 230ms)
+ GET /admin/informes 200 in 993ms (next.js: 135ms, proxy.ts: 707ms, application-code: 150ms)
+ GET /admin/informes 200 in 278ms (next.js: 7ms, proxy.ts: 231ms, application-code: 40ms)
+ GET /admin/informes 200 in 313ms (next.js: 6ms, proxy.ts: 214ms, application-code: 93ms)
+ GET /admin/informes 200 in 273ms (next.js: 11ms, proxy.ts: 209ms, application-code: 54ms)
+ GET /admin/informes 200 in 473ms (next.js: 10ms, proxy.ts: 400ms, application-code: 62ms)
+ GET /admin/informes 200 in 287ms (next.js: 8ms, proxy.ts: 240ms, application-code: 38ms)
+[browser] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/producto/..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head headCacheNode={{rsc:{...}, ...}}>
+                    <__next_viewport_boundary__>
+                    <MetadataWrapper>
+                      <div
++                       hidden={true}
+-                       hidden={null}
+-                       style={{display:"contents"}}
+                      >
+                        <__next_metadata_boundary__>
++                         <Suspense name="Next.Metadata">
+                    ...
+                  ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:3318:56)
+    at updateSuspenseComponent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6299:99)
+    at beginWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6762:24)
+    at runWithFiberInDEV (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:965:74)
+    at performUnitOfWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9555:97)
+    at workLoopConcurrentByScheduler (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:2647:64)
+    at Suspense (<anonymous>)
+[browser] React has detected a change in the order of Hooks called by ProductPage. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://react.dev/link/rules-of-hooks
+
+   Previous render            Next render
+   ------------------------------------------------------
+1. useState                   useState
+2. useState                   useState
+3. useEffect                  useEffect
+4. undefined                  useState
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    at updateHookTypesDev (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4587:25)
+    at Object.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15488:13)
+    at exports.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:1754:36)
+    at useProductSelection (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:454:330)
+    at ProductPage (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:1709:235)
+    at Object.react_stack_bottom_frame (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15037:24)
+    at renderWithHooks (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4620:24)
+    at updateFunctionComponent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6081:21)
+    at beginWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6691:24)
+    at runWithFiberInDEV (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:965:74)
+    at performUnitOfWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9555:97)
+    at workLoopSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9449:40)
+    at renderRootSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9061:186)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:2647:64) (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4587:25)
+[browser] Uncaught Error: Rendered more hooks than during the previous render.
+    at updateWorkInProgressHook (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4734:23)
+    at updateReducer (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4828:20)
+    at Object.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15492:24)
+    at exports.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:1754:36)
+    at useProductSelection (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:454:330)
+    at ProductPage (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:1709:235)
+    at Object.react_stack_bottom_frame (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15037:24)
+    at renderWithHooks (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4620:24)
+    at updateFunctionComponent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6081:21)
+    at beginWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6691:24)
+    at runWithFiberInDEV (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:965:74)
+    at performUnitOfWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9555:97)
+    at workLoopSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9449:40)
+    at renderRootSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:2647:64)
+    at ClientPageRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_0e6hsor._.js:6862:50)
+ GET /producto/cumbre-nublada 200 in 83ms (next.js: 22ms, proxy.ts: 3ms, application-code: 58ms)
+[browser] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/producto/..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head headCacheNode={{rsc:{...}, ...}}>
+                    <__next_viewport_boundary__>
+                    <MetadataWrapper>
+                      <div
++                       hidden={true}
+-                       hidden={null}
+-                       style={{display:"contents"}}
+                      >
+                        <__next_metadata_boundary__>
++                         <Suspense name="Next.Metadata">
+                    ...
+                  ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:3318:56)
+    at updateSuspenseComponent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6299:99)
+    at beginWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6762:24)
+    at runWithFiberInDEV (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:965:74)
+    at performUnitOfWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9555:97)
+    at workLoopConcurrentByScheduler (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:2647:64)
+    at Suspense (<anonymous>)
+[browser] React has detected a change in the order of Hooks called by ProductPage. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://react.dev/link/rules-of-hooks
+
+   Previous render            Next render
+   ------------------------------------------------------
+1. useState                   useState
+2. useState                   useState
+3. useEffect                  useEffect
+4. undefined                  useState
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    at updateHookTypesDev (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4587:25)
+    at Object.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15488:13)
+    at exports.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:1754:36)
+    at useProductSelection (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:454:330)
+    at ProductPage (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:1709:235)
+    at Object.react_stack_bottom_frame (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15037:24)
+    at renderWithHooks (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4620:24)
+    at updateFunctionComponent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6081:21)
+    at beginWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6691:24)
+    at runWithFiberInDEV (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:965:74)
+    at performUnitOfWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9555:97)
+    at workLoopSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9449:40)
+    at renderRootSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9061:186)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:2647:64) (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4587:25)
+[browser] Uncaught Error: Rendered more hooks than during the previous render.
+    at updateWorkInProgressHook (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4734:23)
+    at updateReducer (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4828:20)
+    at Object.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15492:24)
+    at exports.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:1754:36)
+    at useProductSelection (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:454:330)
+    at ProductPage (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:1709:235)
+    at Object.react_stack_bottom_frame (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15037:24)
+    at renderWithHooks (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4620:24)
+    at updateFunctionComponent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6081:21)
+    at beginWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6691:24)
+    at runWithFiberInDEV (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:965:74)
+    at performUnitOfWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9555:97)
+    at workLoopSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9449:40)
+    at renderRootSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:2647:64)
+    at ClientPageRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_0e6hsor._.js:6862:50)
+ GET /producto/cumbre-nublada 200 in 74ms (next.js: 18ms, proxy.ts: 3ms, application-code: 53ms)
+[browser] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/producto/..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head headCacheNode={{rsc:{...}, ...}}>
+                    <__next_viewport_boundary__>
+                    <MetadataWrapper>
+                      <div
++                       hidden={true}
+-                       hidden={null}
+-                       style={{display:"contents"}}
+                      >
+                        <__next_metadata_boundary__>
++                         <Suspense name="Next.Metadata">
+                    ...
+                  ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:3318:56)
+    at updateSuspenseComponent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6299:99)
+    at beginWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6762:24)
+    at runWithFiberInDEV (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:965:74)
+    at performUnitOfWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9555:97)
+    at workLoopConcurrentByScheduler (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:2647:64)
+    at Suspense (<anonymous>)
+ GET /producto/cumbre-nublada 200 in 77ms (next.js: 12ms, proxy.ts: 3ms, application-code: 62ms)
+[browser] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/producto/..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head headCacheNode={{rsc:{...}, ...}}>
+                    <__next_viewport_boundary__>
+                    <MetadataWrapper>
+                      <div
++                       hidden={true}
+-                       hidden={null}
+-                       style={{display:"contents"}}
+                      >
+                        <__next_metadata_boundary__>
++                         <Suspense name="Next.Metadata">
+                    ...
+                  ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:3318:56)
+    at updateSuspenseComponent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6299:99)
+    at beginWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6762:24)
+    at runWithFiberInDEV (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:965:74)
+    at performUnitOfWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9555:97)
+    at workLoopConcurrentByScheduler (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:2647:64)
+    at Suspense (<anonymous>)
+[browser] React has detected a change in the order of Hooks called by ProductPage. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://react.dev/link/rules-of-hooks
+
+   Previous render            Next render
+   ------------------------------------------------------
+1. useState                   useState
+2. useState                   useState
+3. useEffect                  useEffect
+4. undefined                  useState
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    at updateHookTypesDev (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4587:25)
+    at Object.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15488:13)
+    at exports.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:1754:36)
+    at useProductSelection (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:454:330)
+    at ProductPage (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:1709:235)
+    at Object.react_stack_bottom_frame (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15037:24)
+    at renderWithHooks (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4620:24)
+    at updateFunctionComponent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6081:21)
+    at beginWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6691:24)
+    at runWithFiberInDEV (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:965:74)
+    at performUnitOfWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9555:97)
+    at workLoopSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9449:40)
+    at renderRootSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9061:186)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:2647:64) (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4587:25)
+[browser] Uncaught Error: Rendered more hooks than during the previous render.
+    at updateWorkInProgressHook (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4734:23)
+    at updateReducer (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4828:20)
+    at Object.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15492:24)
+    at exports.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:1754:36)
+    at useProductSelection (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:454:330)
+    at ProductPage (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:1709:235)
+    at Object.react_stack_bottom_frame (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15037:24)
+    at renderWithHooks (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4620:24)
+    at updateFunctionComponent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6081:21)
+    at beginWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6691:24)
+    at runWithFiberInDEV (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:965:74)
+    at performUnitOfWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9555:97)
+    at workLoopSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9449:40)
+    at renderRootSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:2647:64)
+    at ClientPageRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_0e6hsor._.js:6862:50)
+ GET / 200 in 449ms (next.js: 188ms, proxy.ts: 2ms, application-code: 259ms)
+ GET /producto/cumbre-nublada 200 in 79ms (next.js: 18ms, proxy.ts: 3ms, application-code: 58ms)
+[browser] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/producto/..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head headCacheNode={{rsc:{...}, ...}}>
+                    <__next_viewport_boundary__>
+                    <MetadataWrapper>
+                      <div
++                       hidden={true}
+-                       hidden={null}
+-                       style={{display:"contents"}}
+                      >
+                        <__next_metadata_boundary__>
++                         <Suspense name="Next.Metadata">
+                    ...
+                  ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:3318:56)
+    at updateSuspenseComponent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6299:99)
+    at beginWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6762:24)
+    at runWithFiberInDEV (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:965:74)
+    at performUnitOfWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9555:97)
+    at workLoopConcurrentByScheduler (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:2647:64)
+    at Suspense (<anonymous>)
+[browser] React has detected a change in the order of Hooks called by ProductPage. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://react.dev/link/rules-of-hooks
+
+   Previous render            Next render
+   ------------------------------------------------------
+1. useState                   useState
+2. useState                   useState
+3. useEffect                  useEffect
+4. undefined                  useState
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    at updateHookTypesDev (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4587:25)
+    at Object.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15488:13)
+    at exports.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:1754:36)
+    at useProductSelection (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:454:330)
+    at ProductPage (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:1709:235)
+    at Object.react_stack_bottom_frame (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15037:24)
+    at renderWithHooks (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4620:24)
+    at updateFunctionComponent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6081:21)
+    at beginWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6691:24)
+    at runWithFiberInDEV (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:965:74)
+    at performUnitOfWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9555:97)
+    at workLoopSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9449:40)
+    at renderRootSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9061:186)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:2647:64) (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4587:25)
+[browser] Uncaught Error: Rendered more hooks than during the previous render.
+    at updateWorkInProgressHook (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4734:23)
+    at updateReducer (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4828:20)
+    at Object.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15492:24)
+    at exports.useState (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:1754:36)
+    at useProductSelection (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:454:330)
+    at ProductPage (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/_1u0g6m2._.js:1709:235)
+    at Object.react_stack_bottom_frame (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:15037:24)
+    at renderWithHooks (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:4620:24)
+    at updateFunctionComponent (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6081:21)
+    at beginWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:6691:24)
+    at runWithFiberInDEV (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:965:74)
+    at performUnitOfWork (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9555:97)
+    at workLoopSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9449:40)
+    at renderRootSync (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9433:13)
+    at performWorkOnRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_react-dom_002ng26._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_dist_compiled_13fjdbf._.js:2647:64)
+    at ClientPageRoot (file://C:/Users/melvi/OneDrive/Documentos/Emprendimiento/Mis web 2026/Web picacho/web-picacho/.next/dev/static/chunks/1e9k_next_0e6hsor._.js:6862:50)

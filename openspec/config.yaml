@@ -1,0 +1,36 @@
+schema: spec-driven
+
+context: |
+  Tech stack: Next.js 16.2.10, React 19.2.4, Tailwind v4, TypeScript 5.x, Supabase
+  Architecture: App Router, Server/Client Components, Server Actions for writes, client-Supabase for reads
+  Testing: No test runner configured
+  Style: SRP components (<80 lines), atomic UI → domain → sections, Playfair Display + Inter
+
+rules:
+  proposal:
+    - Include rollback plan for risky changes
+    - Surface breaking contract changes explicitly
+  specs:
+    - Use Given/When/Then for scenarios
+    - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY)
+  design:
+    - Include sequence diagrams for complex flows
+    - Document architecture decisions with rationale
+    - Never mix server-only imports in client-component files
+  tasks:
+    - Group by phase, use hierarchical numbering
+    - Keep tasks completable in one session
+  apply:
+    - Follow existing code patterns
+    - Use Server Actions for writes, client-side Supabase only for reads
+    - next/image with fill requires position: relative on parent
+    - Type with SupabaseClient<Database>, never use as/unknown casts
+    - Use <Link> for internal nav, <a> for external links
+    tdd: false
+    test_command: ""
+  verify:
+    test_command: ""
+    build_command: "npx tsc --noEmit && npm run build"
+    coverage_threshold: 0
+  archive:
+    - Warn before merging destructive deltas
