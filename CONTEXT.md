@@ -141,6 +141,7 @@
 - **MetricCard**: valor `text-[32px]` → `text-2xl sm:text-[32px]`
 - **ConfirmModal + QuickAddModal**: ya centrados en mobile (no se tocaron)
 - **CartDrawer**: se dejó como drawer lateral (no es un modal)
+- **ThumbnailList**: miniaturas forzadas a `h-20 w-20` (80×80px) con `object-cover` para tamaño uniforme
 
 ## Pendiente
 - Subir imágenes reales de productos
