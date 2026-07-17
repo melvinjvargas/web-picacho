@@ -59,18 +59,18 @@
 - [ ] 4.2 Create lib/constants/orders.ts importing from lib/status-colors.ts; deduplicate status maps from pedidos/page.tsx and RecentOrders.tsx — SKIPPED: ORDER_STATUS already centralized in lib/status-colors.ts
 - [x] 4.3 Refactor pedidos: page → AdminTable with render prop for status <select>; 189L → 31L + usePedidos (64L) + PedidosColumns (57L) + PedidosFilters (31L)
 - [x] 4.4 Refactor inventario: page → AdminTable via InventarioTable wrapper; 233L → 59L + useInventario (75L) + InventarioTable (27L) + InventarioColumns (57L)
-- [ ] 4.5 Refactor descuentos: extract useDescuentos + DescuentosColumns + DescuentosForm to _components/; page → AdminTable ≤60L; 403L → ~60L
-- [ ] 4.6 Refactor categorias: extract useCategorias + CategoriasColumns + CategoriasForm to _components/; page → AdminTable ≤60L; 283L → ~60L
-- [ ] 4.7 Refactor informes: extract MetricsRow + TopProductsTable + DiscountsUsedTable to _components/; page ≤80L; 277L → ~80L
+- [x] 4.5 Refactor descuentos: extract useDescuentos + DescuentosColumns + DescuentosForm to _components/; page → AdminTable ≤60L; 403L → 60L
+- [x] 4.6 Refactor categorias: extract useCategorias + CategoriasColumns + CategoriasForm to _components/; page → AdminTable ≤60L; 283L → 29L
+- [x] 4.7 Refactor informes: extract MetricsRow + TopProductsTable + DiscountsUsedTable to _components/; page ≤80L; 277L → 45L
 - Verify: each page ≤80L (pedidos ≤100L with render complexity); npm run build passes; visual regression: zero
 
 ## Phase 5: Remaining Component Splits (WS1 standalone)
 
-- [ ] 5.1 Split ImageUploader.tsx: extract ThumbnailList + UploadZone + ImagePreview to upload/_components/; ≤75L; 260L → ~75L
-- [ ] 5.2 Split ProductForm.tsx: extract ProductBasicFields + ProductVariantFields to forms/_components/; ≤80L; 240L → ~80L
-- [ ] 5.3 Split CartDrawer.tsx: extract CartItemsList + CartCheckoutSection to layout/_components/; ≤75L; 239L → ~75L
-- [ ] 5.4 Split QuickAddModal.tsx: extract QuickAddFormFields to product-detail/_components/; ≤70L; 183L → ~70L
-- [ ] 5.5 Split ProductPageClient.tsx: extract ProductDetailLayout to producto/[id]/_components/; ≤75L; 146L → ~75L
+- [x] 5.1 Split ImageUploader.tsx: extract ThumbnailList + UploadZone + utils to upload/_components/; 260L → 168L orchestrator + 161L sub-components
+- [x] 5.2 Split ProductForm.tsx: extract ProductBasicFields + ProductVariantFields + FormHelpers to forms/_components/; 240L → 189L orchestrator + 108L sub-components
+- [x] 5.3 Split CartDrawer.tsx: extract CartItemsList + CartCheckoutSection to layout/_components/; 239L → 105L orchestrator + 202L sub-components
+- [x] 5.4 Split QuickAddModal.tsx: extract QuickAddFormFields to product-detail/_components/; 183L → 79L orchestrator + 149L sub-component
+- [x] 5.5 Split ProductPageClient.tsx: extract ProductDetailLayout to producto/[id]/_components/; 146L → 61L orchestrator + 143L sub-component
 - Verify: all target files ≤80L; tsc --noEmit = 0 errors; visual output unchanged from pre-refactor state
 
 ## Phase 6: Final Verification (WS4 continued)

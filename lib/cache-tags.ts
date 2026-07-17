@@ -4,5 +4,7 @@ export const CACHE_TAGS = {
   product: (slug: string) => `product-${slug}`,
   adminDashboard: "admin-dashboard",
   adminPedidos: "admin-pedidos",
+  adminDiscounts: "admin-discounts",
+  adminCategories: "admin-categories",
   content: "content",
 } as const;
