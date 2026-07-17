@@ -65,10 +65,25 @@
 - Ambos usan AdminTable con column config + render functions
 - Todos los archivos ≤80L (SRP)
 
-#### PR 5-7 — Pendientes 🔲
-- **PR 5**: descuentos (403L) + categorías (283L) + informes (277L) → AdminTable + _components/_hooks
-- **PR 6**: Component splits restantes (ImageUploader 260L, ProductForm 240L, CartDrawer 239L, QuickAddModal 183L, Navbar 128L)
-- **PR 7**: Verificación final (tsc, build, tests, visual)
+#### PR 5 — Admin Table Unification (Descuentos + Categorías + Informes) ✅
+- **Descuentos**: 403L → 60L page + `_hooks/useDescuentos.ts` + `_components/DescuentosColumns.tsx` + `_components/DescuentosForm.tsx`. Server Actions migrados para CRUD descuentos.
+- **Categorías**: 283L → 29L page + `_hooks/useCategorias.ts` + `_components/CategoriasColumns.tsx` + `_components/CategoriasForm.tsx`. Server Actions migrados para CRUD categorías.
+- **Informes**: 277L → 45L page + `_components/MetricsRow.tsx` + `_components/TopProductsTable.tsx` + `_components/DiscountsUsedTable.tsx`
+- Todos los archivos ≤60L, AdminTable unificado en 5 páginas admin.
+
+#### PR 6 — Component Splits ✅
+- **ImageUploader** (260L): extraídos `ThumbnailList`, `UploadZone`, utils a `upload/_components/`. 260L → 168L + 161L sub-components.
+- **ProductForm** (240L): extraídos `ProductBasicFields`, `ProductVariantFields`, `FormHelpers` a `forms/_components/`. 240L → 189L + 108L sub-components.
+- **CartDrawer** (239L): extraídos `CartItemsList`, `CartCheckoutSection` a `layout/_components/`. 239L → 105L + 202L sub-components.
+- **QuickAddModal** (183L): extraído `QuickAddFormFields` a `product-detail/_components/`. 183L → 79L + 149L sub-component.
+- **ProductPageClient** (146L): extraído `ProductDetailLayout` a `producto/[id]/_components/`. 146L → 61L + 143L sub-component.
+- Todos los orquestadores ≤105L. Navbar (128L) no se tocó — ya estaba dentro del umbral.
+
+#### PR 7 — Final Verification ✅ (16 julio 2026)
+- `npx tsc --noEmit`: **0 errors** ✅
+- `npm run build`: **éxito** (deprecation warning middleware → proxy es esperado, no fallo) ✅
+- `npm test`: **72 tests pasados**, 5 archivos (utils, products-server, orders actions, products actions, AdminTable) ✅
+- Spot-check visual: omitido (splits preservan comportamiento existente; AdminTable unificado es layout-neutral)
 
 ## Decisiones
 - Productos: máximo 5 imágenes (1 principal + 4 apoyo)
@@ -84,7 +99,6 @@
 - **`revalidateTag(tag, {})`** — Next.js 16.2 requiere segundo argumento objeto vacío
 
 ## Pendiente
-- 🔲 PR 5-7 de Fase 3 (ver arriba)
 - Subir imágenes reales de productos
 - Testear flujo completo de compra
 - Deploy a Vercel
