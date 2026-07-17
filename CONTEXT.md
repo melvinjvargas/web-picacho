@@ -133,6 +133,15 @@
 - **Error 1 — placehold.co**: `next/image` rechazaba URLs de placeholder en datos estáticos → agregado `placehold.co` a `remotePatterns` en `next.config.ts`
 - **Error 2 — cookies() + unstable_cache()**: `getDashboardMetrics` y funciones de `products-server.ts` crasheaban en Turbopack → `unstable_cache` reemplazado por `cache()` de React en `dashboard-server.ts` y `products-server.ts`
 
+### Mobile Responsive Fixes (16 julio)
+- Audit completo de 11 archivos con problemas de overflow y centrado en mobile
+- **Grids responsivos**: AdminDashboard `grid-cols-3` → `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`, MetricsRow idem, ProductForm `[1fr_360px]` → `lg:[1fr_360px]`
+- **Text overflow**: `break-words` en ProductInfo, HeroSection, QuickAddFormFields, QuickAddModal, SectionHeader, AboutSection
+- **ColorSelector**: `flex` → `flex flex-wrap gap-4`
+- **MetricCard**: valor `text-[32px]` → `text-2xl sm:text-[32px]`
+- **ConfirmModal + QuickAddModal**: ya centrados en mobile (no se tocaron)
+- **CartDrawer**: se dejó como drawer lateral (no es un modal)
+
 ## Pendiente
 - Subir imágenes reales de productos
 - Testear flujo completo de compra
