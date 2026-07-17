@@ -39,7 +39,7 @@ export function ThumbnailList({
           onDrop={(e) => onDrop(e, i)}
           onDragEnd={onDragEnd}
           className={cn(
-            "relative shrink-0 cursor-grab rounded-lg transition",
+            "relative h-20 w-20 shrink-0 cursor-grab rounded-lg transition",
             dragIndex === i && "opacity-30",
             dragOverIndex === i && dragIndex !== i && "ring-2 ring-brand-green ring-offset-1",
           )}
@@ -47,9 +47,9 @@ export function ThumbnailList({
           <Image
             src={url}
             alt={`Imagen ${i + 1}`}
-            width={64}
-            height={64}
-            className="rounded-lg object-cover"
+            width={80}
+            height={80}
+            className="h-full w-full rounded-lg object-cover"
             draggable={false}
           />
           {/* Drag handle — top-left */}
