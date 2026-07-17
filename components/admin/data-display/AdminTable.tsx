@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-interface Column<T> {
+export interface Column<T> {
   key: string;
   header: string;
   width?: string;

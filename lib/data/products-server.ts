@@ -1,4 +1,6 @@
+import { unstable_cache } from "next/cache";
 import { createServerSupabase } from "@/lib/server-supabase";
+import { CACHE_TAGS } from "@/lib/cache-tags";
 import { products as staticProducts } from "@/data/products";
 import type { Product, ProductColor, SizeLabel } from "@/types/product";
 
@@ -55,16 +57,24 @@ export async function fetchFromSupabaseServer(): Promise<Product[]> {
   }
 }
 
-export async function getAllProductsServer(): Promise<Product[]> {
-  const db = await fetchFromSupabaseServer();
-  return db.length > 0 ? db : staticProducts;
-}
+export const getAllProductsServer = unstable_cache(
+  async (): Promise<Product[]> => {
+    const db = await fetchFromSupabaseServer();
+    return db.length > 0 ? db : staticProducts;
+  },
+  ["all-products"],
+  { revalidate: 60, tags: [CACHE_TAGS.products] },
+);
 
-export async function getFeaturedProductsServer(): Promise<Product[]> {
-  const db = await fetchFromSupabaseServer();
-  const source = db.length > 0 ? db : staticProducts;
-  return source.slice(0, 4);
-}
+export const getFeaturedProductsServer = unstable_cache(
+  async (): Promise<Product[]> => {
+    const db = await fetchFromSupabaseServer();
+    const source = db.length > 0 ? db : staticProducts;
+    return source.slice(0, 4);
+  },
+  ["featured-products"],
+  { revalidate: 60, tags: [CACHE_TAGS.products] },
+);
 
 export async function getProductByIdServer(id: string): Promise<Product | undefined> {
   const db = await fetchFromSupabaseServer();
@@ -72,8 +82,16 @@ export async function getProductByIdServer(id: string): Promise<Product | undefi
   return source.find((p) => p.id === id || p.slug === id);
 }
 
-export async function getProductBySlugServer(slug: string): Promise<Product | undefined> {
-  const db = await fetchFromSupabaseServer();
-  const source = db.length > 0 ? db : staticProducts;
-  return source.find((p) => p.slug === slug);
+export async function getProductBySlugServer(
+  slug: string,
+): Promise<Product | undefined> {
+  return unstable_cache(
+    async () => {
+      const db = await fetchFromSupabaseServer();
+      const source = db.length > 0 ? db : staticProducts;
+      return source.find((p) => p.slug === slug);
+    },
+    [CACHE_TAGS.product(slug)],
+    { revalidate: 300, tags: [CACHE_TAGS.product(slug)] },
+  )();
 }

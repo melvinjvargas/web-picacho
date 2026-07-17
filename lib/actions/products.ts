@@ -1,7 +1,8 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { createServerSupabase } from "@/lib/server-supabase";
+import { CACHE_TAGS } from "@/lib/cache-tags";
 
 export interface ProductFormData {
   name: string;
@@ -44,6 +45,8 @@ export async function createProduct(data: ProductFormData) {
   if (error) return { success: false, error: error.message };
   revalidatePath("/admin/productos");
   revalidatePath("/");
+  revalidateTag(CACHE_TAGS.products, {});
+  revalidateTag(CACHE_TAGS.adminDashboard, {});
   return { success: true };
 }
 
@@ -69,9 +72,17 @@ export async function updateProduct(id: string, data: ProductFormData) {
     .eq("id", id);
 
   if (error) return { success: false, error: error.message };
+  const slug = data.name
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "")
+    .substring(0, 200);
   revalidatePath("/admin/productos");
-  revalidatePath(`/producto/${data.name.toLowerCase().replace(/\s+/g, "-")}`);
+  revalidatePath(`/producto/${slug}`);
   revalidatePath("/");
+  revalidateTag(CACHE_TAGS.products, {});
+  revalidateTag(CACHE_TAGS.product(slug), {});
+  revalidateTag(CACHE_TAGS.adminDashboard, {});
   return { success: true };
 }
 
@@ -84,6 +95,8 @@ export async function deleteProduct(id: string) {
   if (error) return { success: false, error: error.message };
   revalidatePath("/admin/productos");
   revalidatePath("/");
+  revalidateTag(CACHE_TAGS.products, {});
+  revalidateTag(CACHE_TAGS.adminDashboard, {});
   return { success: true };
 }
 
@@ -100,5 +113,7 @@ export async function toggleProductActive(id: string, currentActive: boolean) {
   if (error) return { success: false, error: error.message };
   revalidatePath("/admin/productos");
   revalidatePath("/");
+  revalidateTag(CACHE_TAGS.products, {});
+  revalidateTag(CACHE_TAGS.adminDashboard, {});
   return { success: true };
 }

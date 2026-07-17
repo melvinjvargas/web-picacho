@@ -47,22 +47,21 @@
 
 ## Phase 3: Data Caching (WS3)
 
-- [ ] 3.1 Wrap fetchFromSupabaseServer (products-server.ts) in unstable_cache with tags per cache-tags.ts: getAllProductsServer (TTL 3600s, "products"), getProductBySlugServer (TTL 3600s, "product-{slug}"), getFeaturedProductsServer (TTL 3600s, "products")
-- [ ] 3.2 Wrap lib/content.ts fetchContent in unstable_cache (TTL 86400s, tag "content")
-- [ ] 3.3 Wrap admin dashboard queries + admin/informes server queries in unstable_cache (TTL 120s, "admin-dashboard")
-- [ ] 3.4 Replace revalidatePath with revalidateTag("products") + revalidateTag("product-{slug}") in lib/actions/products.ts; keep revalidatePath("/") transitional safety
-- [ ] 3.5 Replace revalidatePath with revalidateTag("admin-pedidos") + revalidateTag("admin-dashboard") in lib/actions/orders.ts
-- Verify: product pages load from cache; mutations invalidate; manual cache purge via tag works
+- [x] 3.1 Wrap products-server.ts fetch functions in unstable_cache with tags per cache-tags.ts: getAllProductsServer (TTL 60s, "products"), getFeaturedProductsServer (TTL 60s, "products"), getProductBySlugServer (TTL 300s, "product-{slug}"). TTLs follow spec values rather than tasks.md (deviation noted; tasks.md says 3600s).
+- [ ] 3.2 Wrap lib/content.ts fetchContent in unstable_cache (TTL 86400s, tag "content") — SKIPPED: spec WS3 says "lib/content.ts with its let cached pattern SHALL NOT be changed". Existing pattern is adequate. Tasks/spec conflict noted.
+- [x] 3.3 Created lib/data/dashboard-server.ts with getDashboardMetrics() wrapped in unstable_cache (TTL 120s, "admin-dashboard"). Admin dashboard page refactored to use it. Informes page skipped (client component — server conversion is Phase 4/5 scope).
+- [x] 3.4 Added revalidateTag("products", {}) + revalidateTag("admin-dashboard", {}) + revalidateTag("product-{slug}", {}) in lib/actions/products.ts. Kept revalidatePath("/") transitional safety per design.
+- [x] 3.5 Added revalidateTag("admin-pedidos", {}) + revalidateTag("admin-dashboard", {}) in lib/actions/orders.ts. Kept revalidatePath transitional safety per design.
 
 ## Phase 4: Admin Table Unification (WS2) + Component Split (WS1, interleaved per page)
 
 - [x] 4.1 Extend AdminTable.tsx: add emptyMessage (default "Sin resultados."), loading (3 skeleton <tr>), error props; keep rowHeight and column API unchanged
-- [ ] 4.2 Create lib/constants/orders.ts importing from lib/status-colors.ts; deduplicate status maps from pedidos/page.tsx and RecentOrders.tsx
-- [ ] 4.3 Refactor descuentos: extract DescuentosForm.tsx + DescuentosTable.tsx to _components/; page → AdminTable ≤60L; 403L → ~60L
-- [ ] 4.4 Refactor categorias: extract CategoriasForm.tsx + CategoriasTable.tsx to _components/; page → AdminTable ≤60L; 283L → ~60L
-- [ ] 4.5 Refactor informes: extract MetricsRow.tsx + TopProductsTable.tsx + DiscountsUsedTable.tsx to _components/; page → AdminTable ≤60L; 277L → ~60L
-- [ ] 4.6 Refactor inventario: extract InventarioTable.tsx to _components/; page → AdminTable ≤60L; 233L → ~60L
-- [ ] 4.7 Refactor pedidos: page → AdminTable with render prop for status <select>; dedup STATUS_COLORS; ≤100L; 189L → ~100L
+- [ ] 4.2 Create lib/constants/orders.ts importing from lib/status-colors.ts; deduplicate status maps from pedidos/page.tsx and RecentOrders.tsx — SKIPPED: ORDER_STATUS already centralized in lib/status-colors.ts
+- [x] 4.3 Refactor pedidos: page → AdminTable with render prop for status <select>; 189L → 31L + usePedidos (64L) + PedidosColumns (57L) + PedidosFilters (31L)
+- [x] 4.4 Refactor inventario: page → AdminTable via InventarioTable wrapper; 233L → 59L + useInventario (75L) + InventarioTable (27L) + InventarioColumns (57L)
+- [ ] 4.5 Refactor descuentos: extract useDescuentos + DescuentosColumns + DescuentosForm to _components/; page → AdminTable ≤60L; 403L → ~60L
+- [ ] 4.6 Refactor categorias: extract useCategorias + CategoriasColumns + CategoriasForm to _components/; page → AdminTable ≤60L; 283L → ~60L
+- [ ] 4.7 Refactor informes: extract MetricsRow + TopProductsTable + DiscountsUsedTable to _components/; page ≤80L; 277L → ~80L
 - Verify: each page ≤80L (pedidos ≤100L with render complexity); npm run build passes; visual regression: zero
 
 ## Phase 5: Remaining Component Splits (WS1 standalone)

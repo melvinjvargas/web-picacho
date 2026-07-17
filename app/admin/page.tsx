@@ -1,63 +1,13 @@
 import Link from "next/link";
 import { createServerSupabase } from "@/lib/server-supabase";
+import { getDashboardMetrics } from "@/lib/data/dashboard-server";
 import { MetricCard } from "@/components/admin/data-display/MetricCard";
 import { RecentOrders } from "@/components/admin/data-display/RecentOrders";
 import { DashboardGreeting } from "./DashboardGreeting";
 
 export default async function AdminDashboard() {
   const supabase = await createServerSupabase();
-
-  const now = new Date();
-  const last24h = new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString();
-  const firstOfMonth = `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, "0")}-01`;
-
-  const { count: ordersToday } = await supabase
-    .from("orders")
-    .select("*", { count: "exact", head: true })
-    .gte("created_at", last24h);
-
-  const { data: monthOrders } = await supabase
-    .from("orders")
-    .select("total")
-    .gte("created_at", firstOfMonth)
-    .in("status", ["completado", "en_proceso"]);
-
-  const monthRevenue = (monthOrders || []).reduce(
-    (sum, o) => sum + Number(o.total || 0),
-    0,
-  );
-
-  const { count: activeProducts } = await supabase
-    .from("products")
-    .select("*", { count: "exact", head: true })
-    .eq("is_active", true);
-
-  const { count: inactiveProducts } = await supabase
-    .from("products")
-    .select("*", { count: "exact", head: true })
-    .eq("is_active", false);
-
-  // Start of current week (Monday 00:00 UTC)
-  const nowUTC = new Date();
-  const dayOfWeek = nowUTC.getUTCDay();
-  const daysFromMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
-  const startOfWeek = new Date(Date.UTC(
-    nowUTC.getUTCFullYear(),
-    nowUTC.getUTCMonth(),
-    nowUTC.getUTCDate() - daysFromMonday,
-    0, 0, 0, 0,
-  ));
-
-  const { data: weekOrders } = await supabase
-    .from("orders")
-    .select("total")
-    .gte("created_at", startOfWeek.toISOString())
-    .in("status", ["completado", "en_proceso"]);
-
-  const weekRevenue = (weekOrders || []).reduce(
-    (sum, o) => sum + Number(o.total || 0),
-    0,
-  );
+  const metrics = await getDashboardMetrics();
 
   const { data: recentOrders } = await supabase
     .from("orders")
@@ -72,27 +22,27 @@ export default async function AdminDashboard() {
       <div className="grid grid-cols-3 gap-4">
         <MetricCard
           title="Pedidos hoy"
-          value={ordersToday ?? 0}
+          value={metrics.ordersToday}
           icon="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
         />
         <MetricCard
           title="Ventas de la semana"
-          value={`L. ${weekRevenue.toFixed(2)}`}
+          value={`L. ${metrics.weekRevenue.toFixed(2)}`}
           icon="M23 6l-9.5 9.5-5-5L1 18M17 6h6v6"
         />
         <MetricCard
           title="Ventas del mes"
-          value={`L. ${monthRevenue.toFixed(2)}`}
+          value={`L. ${metrics.monthRevenue.toFixed(2)}`}
           icon="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
         />
         <MetricCard
           title="Productos activos"
-          value={activeProducts ?? 0}
+          value={metrics.activeProducts}
           icon="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
         />
         <MetricCard
           title="Productos inactivos"
-          value={inactiveProducts ?? 0}
+          value={metrics.inactiveProducts}
           variant="alert"
           icon="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
         />

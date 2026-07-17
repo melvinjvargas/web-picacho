@@ -1,7 +1,8 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { createServerSupabase } from "@/lib/server-supabase";
+import { CACHE_TAGS } from "@/lib/cache-tags";
 
 type OrderItemInput = {
   product_id: string;
@@ -30,6 +31,8 @@ export async function createOrder(
 
   if (error) return { success: false, error: error.message };
   revalidatePath("/admin/pedidos");
+  revalidateTag(CACHE_TAGS.adminDashboard, {});
+  revalidateTag(CACHE_TAGS.adminPedidos, {});
   return { success: true };
 }
 
@@ -50,5 +53,7 @@ export async function updateOrderStatus(orderId: string, newStatus: string) {
 
   if (error) return { success: false, error: error.message };
   revalidatePath("/admin/pedidos");
+  revalidateTag(CACHE_TAGS.adminDashboard, {});
+  revalidateTag(CACHE_TAGS.adminPedidos, {});
   return { success: true };
 }

@@ -4,6 +4,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 
 vi.mock("next/cache", () => ({
   revalidatePath: vi.fn(),
+  revalidateTag: vi.fn(),
 }));
 
 vi.mock("@/lib/server-supabase", () => ({
@@ -11,9 +12,11 @@ vi.mock("@/lib/server-supabase", () => ({
 }));
 
 import { createServerSupabase } from "@/lib/server-supabase";
+import { revalidateTag } from "next/cache";
 import { createOrder, updateOrderStatus } from "@/lib/actions/orders";
 
 const mockCreateSS = createServerSupabase as ReturnType<typeof vi.fn>;
+const mockRevalidateTag = revalidateTag as ReturnType<typeof vi.fn>;
 
 interface BuildSupabaseOptions {
   insertResult?: { error: null | { message: string } };
@@ -68,6 +71,8 @@ describe("createOrder", () => {
         status: "pendiente",
       }),
     );
+    expect(mockRevalidateTag).toHaveBeenCalledWith("admin-dashboard", {});
+    expect(mockRevalidateTag).toHaveBeenCalledWith("admin-pedidos", {});
   });
 
   it("returns error when Supabase insert fails", async () => {
@@ -110,6 +115,8 @@ describe("updateOrderStatus", () => {
     expect(mock.from).toHaveBeenCalledWith("orders");
     expect(mock.update).toHaveBeenCalledWith({ status: "completado" });
     expect(mock.eq).toHaveBeenCalledWith("id", "order-1");
+    expect(mockRevalidateTag).toHaveBeenCalledWith("admin-dashboard", {});
+    expect(mockRevalidateTag).toHaveBeenCalledWith("admin-pedidos", {});
   });
 
   it("throws 'No autorizado' for unauthenticated user", async () => {
