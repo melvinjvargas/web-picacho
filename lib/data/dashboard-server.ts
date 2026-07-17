@@ -1,6 +1,5 @@
-import { unstable_cache } from "next/cache";
+import { cache } from "react";
 import { createServerSupabase } from "@/lib/server-supabase";
-import { CACHE_TAGS } from "@/lib/cache-tags";
 
 export interface DashboardMetrics {
   ordersToday: number;
@@ -10,7 +9,7 @@ export interface DashboardMetrics {
   inactiveProducts: number;
 }
 
-export const getDashboardMetrics = unstable_cache(
+export const getDashboardMetrics = cache(
   async (): Promise<DashboardMetrics> => {
     const supabase = await createServerSupabase();
 
@@ -81,6 +80,4 @@ export const getDashboardMetrics = unstable_cache(
       inactiveProducts: inactiveProducts ?? 0,
     };
   },
-  ["dashboard-metrics"],
-  { revalidate: 120, tags: [CACHE_TAGS.adminDashboard] },
 );
