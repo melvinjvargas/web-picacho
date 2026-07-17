@@ -18,7 +18,7 @@ export function MetricCard({ title, value, icon, variant = "default" }: MetricCa
       <div className="flex items-start justify-between gap-4">
         <div className="flex flex-col gap-2">
           <p className="text-[13px] text-text-secondary">{title}</p>
-          <p className="text-[32px] font-bold leading-tight text-text-primary">{value}</p>
+          <p className="text-2xl sm:text-[32px] font-bold leading-tight text-text-primary">{value}</p>
         </div>
         <div
           className={cn(

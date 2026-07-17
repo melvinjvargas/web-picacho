@@ -35,7 +35,7 @@ export function QuickAddFormFields({
         <p className="text-xs font-semibold uppercase tracking-wider text-brand-green">
           {product.category}
         </p>
-        <h2 className="font-heading text-xl font-bold text-text-primary mt-1">
+        <h2 className="font-heading text-xl font-bold text-text-primary mt-1 break-words">
           {product.name}
         </h2>
       </div>

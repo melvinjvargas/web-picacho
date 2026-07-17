@@ -124,7 +124,7 @@ export function ProductForm({ onSuccess, product }: ProductFormProps) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="grid grid-cols-[1fr_360px] gap-x-8 gap-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-x-8 gap-y-6">
         <div className="row-span-2">
           <ProductBasicFields
             register={register}
@@ -174,7 +174,7 @@ export function ProductForm({ onSuccess, product }: ProductFormProps) {
 
       {success && <p className="mt-6 rounded-lg bg-[#E8F0E9] px-4 py-2 text-sm text-brand-green">{success}</p>}
 
-      <div className="sticky bottom-0 z-10 mt-8 flex h-16 items-center justify-between border-t border-border bg-[#FAFAFA] px-8">
+      <div className="sticky bottom-0 z-10 mt-8 flex h-16 items-center justify-between border-t border-border bg-[#FAFAFA] px-4 sm:px-8">
         <button type="button" onClick={submitDraft} disabled={submitting}
           className="h-11 rounded-md border border-border bg-white px-5 text-sm text-text-primary transition hover:bg-bg-secondary">
           Guardar borrador

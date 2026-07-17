@@ -17,7 +17,7 @@ export function ColorSelector({
       <span className="text-xs font-medium tracking-[0.15em] uppercase text-text-secondary">
         Color
       </span>
-      <div className="flex gap-4">
+      <div className="flex flex-wrap gap-4">
         {colors.map((color) => (
           <ColorCircle
             key={color.hex}

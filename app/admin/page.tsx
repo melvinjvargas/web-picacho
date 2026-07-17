@@ -19,7 +19,7 @@ export default async function AdminDashboard() {
     <div className="space-y-8">
       <DashboardGreeting />
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <MetricCard
           title="Pedidos hoy"
           value={metrics.ordersToday}

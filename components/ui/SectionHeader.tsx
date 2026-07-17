@@ -26,14 +26,14 @@ export function SectionHeader({
         <span className="text-xs font-semibold tracking-[0.15em] uppercase text-brand-green">
           {label}
         </span>
-        <h2 className="text-3xl md:text-4xl font-heading font-bold text-text-primary">
+        <h2 className="text-3xl md:text-4xl font-heading font-bold text-text-primary break-words">
           {title}
         </h2>
       </div>
       {linkLabel && linkHref && (
         <a
           href={linkHref}
-          className="text-sm text-text-secondary hover:text-text-primary transition-colors whitespace-nowrap"
+          className="text-sm text-text-secondary hover:text-text-primary transition-colors"
         >
           {linkLabel} →
         </a>

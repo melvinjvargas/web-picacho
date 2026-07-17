@@ -30,7 +30,7 @@ export function HeroSection() {
             <span className="text-xs font-semibold tracking-[0.15em] uppercase text-brand-green">
               {slide.isNew ? "Novedad" : "Más vendido"}
             </span>
-            <h1 className="font-heading text-3xl font-bold text-text-primary sm:text-4xl lg:text-5xl">
+            <h1 className="font-heading text-3xl font-bold text-text-primary sm:text-4xl lg:text-5xl break-words">
               {slide.name}
             </h1>
             <div className="flex items-baseline gap-3">
@@ -55,7 +55,7 @@ export function HeroSection() {
           <div className="lg:w-7/12">
             <Link href={`/producto/${slide.slug}`}>
               <div className="aspect-square lg:aspect-4/3 bg-bg-secondary rounded-none overflow-hidden flex items-center justify-center">
-                <span className="text-sm text-text-muted">
+                <span className="text-sm text-text-muted break-words">
                   [{slide.name}]
                 </span>
               </div>

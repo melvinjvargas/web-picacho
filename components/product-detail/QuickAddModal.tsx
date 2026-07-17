@@ -57,7 +57,7 @@ export function QuickAddModal({ product, onClose }: QuickAddModalProps) {
 
         {/* Image */}
         <div className="sm:w-1/2 aspect-square bg-bg-secondary flex items-center justify-center">
-          <span className="text-sm text-text-muted">[{product.name}]</span>
+          <span className="text-sm text-text-muted break-words">[{product.name}]</span>
         </div>
 
         {/* Info + options */}

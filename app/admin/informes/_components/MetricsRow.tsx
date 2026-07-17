@@ -6,7 +6,7 @@ interface MetricsRowProps {
 
 export function MetricsRow({ totalRevenue, totalOrders, avgTicket }: MetricsRowProps) {
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <MetricCard
         label="Ventas totales"
         value={`L. ${totalRevenue.toFixed(2)}`}
@@ -44,7 +44,7 @@ function MetricCard({ label, value, icon }: { label: string; value: string; icon
       <div className="flex items-start justify-between gap-4">
         <div className="flex flex-col gap-2">
           <p className="text-[13px] text-text-secondary">{label}</p>
-          <p className="text-[32px] font-bold leading-tight text-text-primary">
+          <p className="text-2xl sm:text-[32px] font-bold leading-tight text-text-primary">
             {value}
           </p>
         </div>

@@ -17,7 +17,7 @@ export function AboutSection() {
             <span className="text-xs font-semibold tracking-[0.15em] uppercase text-brand-green">
               El nombre
             </span>
-            <h2 className="font-heading text-3xl font-bold text-text-primary sm:text-4xl">
+            <h2 className="font-heading text-3xl font-bold text-text-primary sm:text-4xl break-words">
               Un cerro, un punto de partida.
             </h2>
             <p className="text-base text-text-secondary leading-relaxed">
