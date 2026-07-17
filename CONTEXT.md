@@ -1,4 +1,4 @@
-# Picacho — Contexto de Sesión (14-15 julio 2026)
+# Picacho — Contexto de Sesión (14-16 julio 2026)
 
 ## Cambios realizados
 
@@ -95,10 +95,46 @@
 - **`next/image` con `fill` requiere `relative` en el padre directo**
 - **Fase 3 usa SDD**: `openspec/` + engram, hybrid mode, auto-chain + stacked-to-main
 - **Patrón de refactor**: `page.tsx` orquestador → `_hooks/usePagename.ts` (estado/datos) + `_components/PagenameColumns.tsx` (config columnas AdminTable) + `_components/PagenameFilters.tsx` (si aplica)
-- **`unstable_cache` en capa de datos, `revalidateTag` en Server Actions** (transición: mantener `revalidatePath` hasta PR final)
+- **`unstable_cache` → `cache` de React** (16 julio): `unstable_cache` es incompatible con `cookies()` en Next.js 16.2 Turbopack. Reemplazado por `cache()` de React que memoiza por request sin romper.
 - **`revalidateTag(tag, {})`** — Next.js 16.2 requiere segundo argumento objeto vacío
+- **`next/image` requiere `remotePatterns`** para cualquier hostname externo (placehold.co)
+
+### PR 4 — Admin Table Unification: Pedidos + Inventario (15 julio)
+- Pedidos: 189L → 31L + usePedidos (64L) + PedidosColumns (57L) + PedidosFilters (31L)
+- Inventario: 233L → 59L + useInventario (75L) + InventarioTable (27L) + InventarioColumns (57L)
+- AdminTable extendido: emptyMessage, loading (3 skeleton rows), error (alert banner)
+
+### PR 3 / PR 4 — Data Caching + Dashboard
+- `lib/data/dashboard-server.ts`: `getDashboardMetrics()` creado → `app/admin/page.tsx` refactorizado
+- `unstable_cache` en products-server: getAllProductsServer (60s), getFeaturedProductsServer (60s), getProductBySlugServer (300s)
+- `revalidateTag` en Server Actions de products y orders
+
+### PR 5 — Admin Table Unification: Descuentos + Categorías + Server Actions (16 julio)
+- Descuentos: 403L → 60L + useDescuentos (146L) + DescuentosColumns (119L) + DescuentosForm (100L) + DescuentosTable (37L)
+- Categorías: 283L → 29L + useCategorias (110L) + CategoriasColumns (76L) + CategoriasForm (44L) + CategoriasTable (33L)
+- Server Actions: `lib/actions/discounts.ts` (91L, 4 actions), `lib/actions/categories.ts` (58L, 3 actions) — auth guard + revalidateTag
+- cache-tags.ts: agregados adminDiscounts, adminCategories
+
+### PR 6 — Informes + Component Splits (16 julio)
+- Informes: 277L → 45L + useInformes (118L) + PeriodFilters (28L) + MetricsRow (57L) + TopProductsTable (61L) + DiscountsUsedTable (56L)
+- ImageUploader: 260L → 168L + UploadZone (63L) + ThumbnailList (75L) + utils (23L)
+- ProductForm: 240L → 189L + ProductBasicFields (29L) + ProductVariantFields (57L) + FormHelpers (22L)
+- CartDrawer: 239L → 105L + CartItemsList (75L) + CartCheckoutSection (127L)
+- QuickAddModal: 183L → 79L + QuickAddFormFields (149L)
+- ProductPageClient: 146L → 61L + ProductDetailLayout (143L)
+
+### PR 7 — Final Verification (16 julio)
+- `npx tsc --noEmit`: 0 errores ✅
+- `npm run build`: éxito ✅
+- `npm test`: 72 tests pasados (5 archivos) ✅
+- 32/32 tareas completadas en total
+
+### Hotfix — Runtime Errors (16 julio)
+- **Error 1 — placehold.co**: `next/image` rechazaba URLs de placeholder en datos estáticos → agregado `placehold.co` a `remotePatterns` en `next.config.ts`
+- **Error 2 — cookies() + unstable_cache()**: `getDashboardMetrics` y funciones de `products-server.ts` crasheaban en Turbopack → `unstable_cache` reemplazado por `cache()` de React en `dashboard-server.ts` y `products-server.ts`
 
 ## Pendiente
 - Subir imágenes reales de productos
 - Testear flujo completo de compra
 - Deploy a Vercel
+- Re-implementar cache persistente con `createClient` directo (sin cookies) si se necesita
